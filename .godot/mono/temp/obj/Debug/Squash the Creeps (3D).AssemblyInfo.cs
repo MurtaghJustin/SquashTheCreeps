@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Squash the Creeps (3D)")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8afb318ffba609195af943973ae2df96ced3b81")]
 [assembly: System.Reflection.AssemblyProductAttribute("Squash the Creeps (3D)")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Squash the Creeps (3D)")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
