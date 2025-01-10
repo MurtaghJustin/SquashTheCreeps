@@ -23,10 +23,10 @@ public partial class Mob : CharacterBody3D
 	public void Initialize(Vector3 startPosition, Vector3 playerPosition)
 	{
 		// We position the mob by placing it at startPosition
-        // and rotate it towards playerPosition, so it looks at the player.
+		// and rotate it towards playerPosition, so it looks at the player.
 		LookAtFromPosition(startPosition, playerPosition, Vector3.Up);
 		// Rotate this mob randomly within range of -45 and +45 degrees,
-        // so that it doesn't move directly towards the player.
+		// so that it doesn't move directly towards the player.
 		RotateY((float)GD.RandRange(-Mathf.Pi / 4d, Mathf.Pi / 4d));
 
 		int randomSpeed = GD.RandRange(MinSpeed, MaxSpeed);
