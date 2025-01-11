@@ -12,10 +12,13 @@ public partial class Mob : CharacterBody3D
 
 	[Signal]
 	public delegate void SquashedEventHandler();
+
+	private AnimationPlayer AnimationPlayer;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,6 +39,7 @@ public partial class Mob : CharacterBody3D
 		int randomSpeed = GD.RandRange(MinSpeed, MaxSpeed);
 		Velocity = Vector3.Forward * randomSpeed;
 		Velocity = Velocity.Rotated(Vector3.Up, Rotation.Y);
+		AnimationPlayer.SpeedScale = randomSpeed / MinSpeed;
 	}
 
 	public void OnVisibilityNotifierScreenExited()
