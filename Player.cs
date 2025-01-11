@@ -104,6 +104,9 @@ public partial class Player : CharacterBody3D
 
 	private void Die()
 	{
+		if (!_running)
+			return;
+
 		EmitSignal(SignalName.Hit);
 		_running = false;
 	}
