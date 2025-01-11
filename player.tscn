@@ -96,6 +96,5 @@ shape = SubResource("CylinderShape3D_42wdh")
 libraries = {
 "": SubResource("AnimationLibrary_kqf0a")
 }
-autoplay = "float"
 
 [connection signal="body_entered" from="MobDetector" to="." method="OnMobDetectorBodyEntered"]

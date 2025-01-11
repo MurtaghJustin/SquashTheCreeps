@@ -17,6 +17,7 @@ public partial class Player : CharacterBody3D
 	
 	private Vector3 _targetVelocity = Vector3.Zero;
 	private Node3D Pivot;
+	private AnimationPlayer AnimationPlayer;
 
 	private bool _running = false;
 	
@@ -24,21 +25,21 @@ public partial class Player : CharacterBody3D
 	public override void _Ready()
 	{
 		Pivot = GetNode<Node3D>("Pivot");
+		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
 	public void Start()
 	{
 		Position = new Vector3(0, 0, 0);
+		AnimationPlayer.SpeedScale = 1;
+		AnimationPlayer.Play();
 		_running = true;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		if (!_running)
-		{
-			return;
-		}
+		if (!_running) return;
 
 		var d = (float)delta;
 		var direction = Vector3.Zero;
@@ -65,6 +66,11 @@ public partial class Player : CharacterBody3D
 		{
 			direction = direction.Normalized();
 			Pivot.Basis = Basis.LookingAt(direction);
+			AnimationPlayer.SpeedScale = 4;
+		}
+		else
+		{
+			AnimationPlayer.SpeedScale = 1;
 		}
 
 		// Apply ground velocity
@@ -100,6 +106,9 @@ public partial class Player : CharacterBody3D
 
 		Velocity = _targetVelocity;
 		MoveAndSlide();
+
+		// Make the player arc when jumping
+		Pivot.Rotation = new Vector3(Mathf.Pi / 6.0f * Velocity.Y / JumpImpulse, Pivot.Rotation.Y, Pivot.Rotation.Z);
 	}
 
 	private void Die()
@@ -108,6 +117,7 @@ public partial class Player : CharacterBody3D
 			return;
 
 		EmitSignal(SignalName.Hit);
+		AnimationPlayer.Stop();
 		_running = false;
 	}
 
