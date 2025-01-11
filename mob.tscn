@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Mob.cs" id="1_2ol87"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wahgj"]
-size = Vector3(1.93604, 1.00281, 2.15964)
+size = Vector3(2.10455, 1.00281, 2.30493)
 
 [node name="Mob" type="CharacterBody3D" groups=["mob"]]
 collision_layer = 2
@@ -16,7 +16,7 @@ script = ExtResource("1_2ol87")
 [node name="Character" parent="Pivot" instance=ExtResource("1_2bsj5")]
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0153809, 0.00140381, -0.0224152)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0254822, 0.00140381, -0.115295)
 shape = SubResource("BoxShape3D_wahgj")
 
 [node name="VisibilityNotifier" type="VisibleOnScreenNotifier3D" parent="."]

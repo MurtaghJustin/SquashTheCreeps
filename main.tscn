@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://77ocafocevyq"]
+[gd_scene load_steps=12 format=3 uid="uid://77ocafocevyq"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_15ix5"]
 [ext_resource type="PackedScene" uid="uid://cxt2cncipyv7x" path="res://player.tscn" id="1_m1jkr"]
 [ext_resource type="PackedScene" uid="uid://cx8rco57gsj8e" path="res://mob.tscn" id="2_xdmg2"]
+[ext_resource type="FontFile" uid="uid://rmsobmd8xhio" path="res://fonts/Montserrat-Medium.ttf" id="4_341jp"]
+[ext_resource type="Script" path="res://ScoreLabel.cs" id="5_n4mlk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cq13j"]
 size = Vector3(60, 2, 60)
@@ -22,6 +24,10 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
+
+[sub_resource type="Theme" id="Theme_ty1va"]
+default_font = ExtResource("4_341jp")
+default_font_size = 22
 
 [node name="Main" type="Node"]
 script = ExtResource("1_15ix5")
@@ -82,6 +88,52 @@ transform = Transform3D(-0.00482919, 0, -0.999988, 0, 1, 0, 0.999988, 0, -0.0048
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ty1va")
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 40.0
+offset_right = 205.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Squishes: 00"
+script = ExtResource("5_n4mlk")
+
+[node name="Retry" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882, 0.105882, 0.105882, 0.411765)
+
+[node name="Label" type="Label" parent="UI/Retry"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -29.0
+offset_right = 152.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press Enter or Start to retry."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [connection signal="Hit" from="Player" to="." method="OnPlayerHit"]
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
