@@ -9,6 +9,7 @@ public partial class Main : Node
 	private Player Player;
 	private PathFollow3D MobSpawnLocation;
 	private Timer MobTimer;
+	private AudioStreamPlayer DeathSound;
 	private ScoreLabel UIScoreLabel;
 	private Control UIRetry;
 
@@ -21,6 +22,7 @@ public partial class Main : Node
 		MobTimer = GetNode<Timer>("MobTimer");
 		UIScoreLabel = GetNode<ScoreLabel>("UI/ScoreLabel");
 		UIRetry = GetNode<Control>("UI/Retry");
+		DeathSound = GetNode<AudioStreamPlayer>("DeathSound");
 
 		UIRetry.Hide();
 	}
@@ -52,5 +54,7 @@ public partial class Main : Node
 	{
 		MobTimer.Stop();
 		UIRetry.Show();
+		DeathSound.PlaybackType = AudioServer.PlaybackType.Max;
+		DeathSound.Play();
 	}
 }

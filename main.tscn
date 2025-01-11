@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://77ocafocevyq"]
+[gd_scene load_steps=14 format=3 uid="uid://77ocafocevyq"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_15ix5"]
 [ext_resource type="PackedScene" uid="uid://cxt2cncipyv7x" path="res://player.tscn" id="1_m1jkr"]
 [ext_resource type="PackedScene" uid="uid://cx8rco57gsj8e" path="res://mob.tscn" id="2_xdmg2"]
 [ext_resource type="FontFile" uid="uid://rmsobmd8xhio" path="res://fonts/Montserrat-Medium.ttf" id="4_341jp"]
 [ext_resource type="Script" path="res://ScoreLabel.cs" id="5_n4mlk"]
+[ext_resource type="AudioStream" uid="uid://3a1q1kj6sx5l" path="res://art/backgroundMusic.ogg" id="6_mjq1h"]
+[ext_resource type="AudioStream" uid="uid://duoqvpxn332o0" path="res://art/deathGuitarSound.wav" id="7_kavo0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cq13j"]
 size = Vector3(60, 2, 60)
@@ -83,7 +85,7 @@ mesh = SubResource("CylinderMesh_nptr6")
 curve = SubResource("Curve3D_1qwrt")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.00482919, 0, -0.999988, 0, 1, 0, 0.999988, 0, -0.00482919, -13.823, 0, -14.967)
+transform = Transform3D(-0.00482919, 0, -0.999987, 0, 1, 0, 0.999987, 0, -0.00482919, -13.823, 0, -14.967)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -134,6 +136,15 @@ text = "Press Enter or Start to retry."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_mjq1h")
+volume_db = -12.0
+autoplay = true
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_kavo0")
+volume_db = 12.0
 
 [connection signal="Hit" from="Player" to="." method="OnPlayerHit"]
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
