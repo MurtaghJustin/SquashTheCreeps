@@ -11,9 +11,11 @@ public partial class Player : CharacterBody3D
 	public int JumpImpulse { get; set; } = 20;
 	[Export]
 	public int BounceImpulse { get; set; } = 16;
+
+	[Signal]
+	public delegate void HitEventHandler();
 	
 	private Vector3 _targetVelocity = Vector3.Zero;
-
 	private Node3D Pivot;
 	
 	// Called when the node enters the scene tree for the first time.
@@ -85,5 +87,16 @@ public partial class Player : CharacterBody3D
 
 		Velocity = _targetVelocity;
 		MoveAndSlide();
+	}
+
+	private void Die()
+	{
+		EmitSignal(SignalName.Hit);
+		QueueFree();
+	}
+
+	private void OnMobDetectorBodyEntered(Node3D body)
+	{
+		Die();
 	}
 }

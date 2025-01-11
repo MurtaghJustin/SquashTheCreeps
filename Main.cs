@@ -8,12 +8,14 @@ public partial class Main : Node
 
 	private Player Player;
 	private PathFollow3D MobSpawnLocation;
+	private Timer MobTimer;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Player = GetNode<Player>("Player");
 		MobSpawnLocation = GetNode<PathFollow3D>("SpawnPath/SpawnLocation");
+		MobTimer = GetNode<Timer>("MobTimer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,5 +32,10 @@ public partial class Main : Node
 		Vector3 playerPosition = Player.Position;
 		mob.Initialize(spawnLoc.Position, playerPosition);
 		AddChild(mob);
+	}
+
+	private void OnPlayerHit()
+	{
+		MobTimer.Stop();
 	}
 }

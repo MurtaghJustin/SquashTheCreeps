@@ -83,4 +83,5 @@ transform = Transform3D(-0.00482919, 0, -0.999988, 0, 1, 0, 0.999988, 0, -0.0048
 wait_time = 0.5
 autostart = true
 
+[connection signal="Hit" from="Player" to="." method="OnPlayerHit"]
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
