@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
 public partial class Mob : CharacterBody3D
@@ -8,6 +9,9 @@ public partial class Mob : CharacterBody3D
 	public int MinSpeed { get; set; } = 10;
 	[Export]
 	public int MaxSpeed { get; set; } = 18;
+
+	[Signal]
+	public delegate void SquashedEventHandler();
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -36,6 +40,12 @@ public partial class Mob : CharacterBody3D
 
 	public void OnVisibilityNotifierScreenExited()
 	{
+		QueueFree();
+	}
+
+	public void Squash()
+	{
+		EmitSignal(SignalName.Squashed);
 		QueueFree();
 	}
 }

@@ -28,17 +28,20 @@ script = ExtResource("1_15ix5")
 MobScene = ExtResource("2_xdmg2")
 
 [node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("BoxShape3D_cq13j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_abxtx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0.0484819, 17.7118, -0.352024)
+transform = Transform3D(0.5, -0.777049, 0.382355, 0, 0.441506, 0.897258, -0.866025, -0.448629, 0.220753, 0, 12.5592, 14.7757)
 
 [node name="Player" parent="." instance=ExtResource("1_m1jkr")]
 
@@ -49,9 +52,10 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.544066, 0.606078, 18.8069)
 projection = 1
 size = 19.0
-far = 100.0
+far = 50.0
 
 [node name="Cylinders" type="Node3D" parent="."]
+visible = false
 
 [node name="MeshInstance" type="MeshInstance3D" parent="Cylinders"]
 transform = Transform3D(0.984044, 0, 0, 0, 0.984044, 0, 0, 0, 0.984044, -13.8006, 0, -14.865)
@@ -73,7 +77,7 @@ mesh = SubResource("CylinderMesh_nptr6")
 curve = SubResource("Curve3D_1qwrt")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.00483074, 0, -0.999988, 0, 1, 0, 0.999988, 0, -0.00483074, -13.823, 0, -14.967)
+transform = Transform3D(-0.00482919, 0, -0.999988, 0, 1, 0, 0.999988, 0, -0.00482919, -13.823, 0, -14.967)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5

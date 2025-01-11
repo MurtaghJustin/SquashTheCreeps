@@ -7,6 +7,10 @@ public partial class Player : CharacterBody3D
 	public int Speed { get; set; } = 14;
 	[Export]
 	public int FallAcceleration { get; set; } = 75;
+	[Export]
+	public int JumpImpulse { get; set; } = 20;
+	[Export]
+	public int BounceImpulse { get; set; } = 16;
 	
 	private Vector3 _targetVelocity = Vector3.Zero;
 
@@ -56,6 +60,27 @@ public partial class Player : CharacterBody3D
 		if (!IsOnFloor())
 		{
 			_targetVelocity.Y -= FallAcceleration * d;
+		}
+		else if (Input.IsActionPressed("jump"))
+		{
+			_targetVelocity.Y = JumpImpulse;
+		}
+
+		var slideCollisionCount = GetSlideCollisionCount();
+		for (int i = 0; i < slideCollisionCount; i++)
+		{
+			var collision = GetSlideCollision(i);
+
+			if (collision.GetCollider() is Mob mob)
+			{
+				// Check if we're hitting it from above
+				if (Vector3.Up.Dot(collision.GetNormal()) > 0.1f)
+				{
+					mob.Squash();
+					_targetVelocity.Y = BounceImpulse;
+					break;
+				}
+			}
 		}
 
 		Velocity = _targetVelocity;
