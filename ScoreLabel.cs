@@ -4,11 +4,12 @@ using System;
 public partial class ScoreLabel : Label
 {
 	private int _score = 0;
+	private int _highScore = 0;
 	private string ScoreText
 	{
 		get
 		{
-			return $"Squishes: {_score:D2}";
+			return $"Squishes: {_score:D2} | Highscore: {_highScore:D2}";
 		}
 	}
 	
@@ -24,7 +25,16 @@ public partial class ScoreLabel : Label
 
 	public void OnMobSquashed()
 	{
-		_score++;
+		UpdateScore(_score + 1);
+	}
+
+	public void UpdateScore(int score)
+	{
+		_score = score;
+		if (_score > _highScore)
+		{
+			_highScore = _score;
+		}
 		Text = ScoreText;
 	}
 }

@@ -17,6 +17,8 @@ public partial class Player : CharacterBody3D
 	
 	private Vector3 _targetVelocity = Vector3.Zero;
 	private Node3D Pivot;
+
+	private bool _running = false;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -24,9 +26,20 @@ public partial class Player : CharacterBody3D
 		Pivot = GetNode<Node3D>("Pivot");
 	}
 
+	public void Start()
+	{
+		Position = new Vector3(0, 0, 0);
+		_running = true;
+	}
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!_running)
+		{
+			return;
+		}
+
 		var d = (float)delta;
 		var direction = Vector3.Zero;
 
@@ -92,7 +105,7 @@ public partial class Player : CharacterBody3D
 	private void Die()
 	{
 		EmitSignal(SignalName.Hit);
-		QueueFree();
+		_running = false;
 	}
 
 	private void OnMobDetectorBodyEntered(Node3D body)

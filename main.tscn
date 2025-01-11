@@ -50,6 +50,7 @@ mesh = SubResource("BoxMesh_abxtx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.5, -0.777049, 0.382355, 0, 0.441506, 0.897258, -0.866025, -0.448629, 0.220753, 0, 12.5592, 14.7757)
+sky_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("1_m1jkr")]
 
@@ -89,7 +90,6 @@ transform = Transform3D(-0.00482919, 0, -0.999987, 0, 1, 0, 0.999987, 0, -0.0048
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
-autostart = true
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -137,10 +137,37 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="MainMenu" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882, 0.105882, 0.105882, 0.411765)
+
+[node name="Label" type="Label" parent="UI/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -29.0
+offset_right = 152.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press Enter or Start to squash!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_mjq1h")
 volume_db = -12.0
-autoplay = true
+parameters/looping = true
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_kavo0")
